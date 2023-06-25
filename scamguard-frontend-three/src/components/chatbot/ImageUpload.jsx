@@ -42,7 +42,7 @@ const ImageUpload = (props) => {
           {imageUrl && (
             <div>
               <div>Your Image</div>
-              <img src={imageUrl} height="100px" alt="Uploaded" />
+              <img src={imageUrl} style={{ height: 500 }} alt="Uploaded" />
             </div>
           )}
           {progress > 0 && progress < 1 ? (
