@@ -1,9 +1,5 @@
 import React from "react";
-import Chatbot from "react-chatbot-kit";
-import config from "./components/chatbot/config";
-import MessageParser from "./components/chatbot/MessageParser";
-import ActionProvider from "./components/chatbot/ActionProvider";
-import "react-chatbot-kit/build/main.css";
+import ChatBot from "./components/chatbot/ChatBot";
 
 function App() {
   return (
@@ -27,11 +23,7 @@ function App() {
         situation.
       </p>
       <br />
-      <Chatbot
-        config={config}
-        messageParser={MessageParser}
-        actionProvider={ActionProvider}
-      />
+      <ChatBot />
     </section>
   );
 }
