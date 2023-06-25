@@ -137,24 +137,53 @@ const Chat = () => {
     sendMessage(CHECK_URL_URL, inputValue);
   };
 
-  const handleConfirmAudio = (inputValue) => {
-    setChatLog((prevChatLog) => [
-      ...prevChatLog,
-      {
-        type: "user",
-        message: inputValue,
-      },
-    ]);
+  const handleConfirmAudio = async (e, audioFile) => {
+    e.preventDefault();
 
-    setGptChat((prevGptChat) => [
-      ...prevGptChat,
-      {
-        role: "user",
-        content: inputValue,
-      },
-    ]);
+    setIsLoading(true);
 
-    sendMessage(CHECK_AUDIO_URL, inputValue);
+    const formData = new FormData();
+    formData.append("file", audioFile);
+
+    await flask
+      .post(CHECK_AUDIO_URL, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response.data[1]);
+
+        setChatLog((prevChatLog) => [
+          ...prevChatLog,
+          {
+            type: "user",
+            message: response.data[1],
+          },
+          {
+            type: "bot",
+            message: response.data[0][0].content,
+          },
+        ]);
+
+        setGptChat((prevGptChat) => [
+          ...prevGptChat,
+          {
+            type: "user",
+            message: response.data[1],
+          },
+          {
+            role: "assistant",
+            content: response.data[0][0].content,
+          },
+        ]);
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+      });
   };
 
   return (
@@ -174,7 +203,16 @@ const Chat = () => {
                     message.type === "user" ? "bg-purple-500" : "bg-gray-800"
                   } rounded-lg p-4 text-white max-w-sm`}
                 >
-                  {message.message}
+                  {message.message.split("\n").map((m, index) => {
+                    return (
+                      <>
+                        <p key={index}>{m}</p>
+                        {index !== message.message.split("\n").length - 1 && (
+                          <br />
+                        )}
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             ))}
