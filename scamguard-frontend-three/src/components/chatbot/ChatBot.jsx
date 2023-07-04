@@ -62,6 +62,7 @@ const Chat = () => {
       chatMessages: [...gptChat, { role: "user", content: message }],
     };
 
+    console.log(chatMessages);
     setIsLoading(true);
 
     spring
@@ -161,7 +162,7 @@ const Chat = () => {
             message: response.data[1],
           },
           {
-            type: "bot",
+            role: "bot",
             message: response.data[0][0].content,
           },
         ]);
@@ -169,8 +170,8 @@ const Chat = () => {
         setGptChat((prevGptChat) => [
           ...prevGptChat,
           {
-            type: "user",
-            message: response.data[1],
+            role: "user",
+            content: response.data[1],
           },
           {
             role: "assistant",
