@@ -41,14 +41,8 @@ const ImageUpload = (props) => {
           <input type="file" accept="image/*" onChange={handleUpload} />
           {imageUrl && (
             <div>
-              <div>Your Image</div>
               <img src={imageUrl} style={{ height: 500 }} alt="Uploaded" />
             </div>
-          )}
-          {progress > 0 && progress < 1 ? (
-            <div>{`Reading text: ${Math.round(progress * 100)}%`}</div>
-          ) : (
-            <div></div>
           )}
           {ocrData ? (
             <div>
