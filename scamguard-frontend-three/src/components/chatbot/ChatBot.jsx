@@ -24,7 +24,7 @@ const Chat = () => {
     { type: "bot", message: 'Type "url" for to checking url' },
     { type: "bot", message: 'Type "image" to upload image file for checking' },
     { type: "bot", message: 'Type "audio" to upload audio file for checking' },
-    { type: "bot", message: 'For "anything" else, just type your message' },
+    { type: "bot", message: "For anything else, just type your message" },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [gptChat, setGptChat] = useState([]);
