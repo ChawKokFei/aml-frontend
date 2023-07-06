@@ -4,6 +4,8 @@ import TypingAnimation from "./TypingAnimation";
 import ImageUpload from "./ImageUpload";
 import UrlUpload from "./UrlUpload";
 import Dictaphone from "./Dictaphone";
+import { AddLink, AudioFile, InsertPhoto } from "@mui/icons-material";
+import { Link } from "@mui/material";
 
 const flask = axios.create({
   baseURL: "http://127.0.0.1:5000",
@@ -20,11 +22,7 @@ const CHECK_AUDIO_URL = "api/v1/speech-fraud-detection";
 const Chat = () => {
   const [inputValue, setInputValue] = useState("");
   const [chatLog, setChatLog] = useState([
-    { type: "bot", message: "Welcome to Scamguard" },
-    { type: "bot", message: 'Type "url" for checking url' },
-    { type: "bot", message: 'Type "image" to upload image file for checking' },
-    { type: "bot", message: 'Type "audio" to upload audio file for checking' },
-    { type: "bot", message: "For anything else, just type your message" },
+    { type: "bot", message: "Welcome to Scamguard. How may I help you?" },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [gptChat, setGptChat] = useState([]);
@@ -34,26 +32,18 @@ const Chat = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputValue.toLowerCase().trim() === "url") {
-      console.log("url");
-      setUploadUrl(true);
-    } else if (inputValue.toLowerCase().trim() === "image") {
-      setUploadImage(true);
-    } else if (inputValue.toLowerCase().trim() === "audio") {
-      setUploadAudio(true);
-    } else {
-      setChatLog((prevChatLog) => [
-        ...prevChatLog,
-        { type: "user", message: inputValue },
-      ]);
+    setChatLog((prevChatLog) => [
+      ...prevChatLog,
+      { type: "user", message: inputValue },
+    ]);
 
-      setGptChat((prevGptChat) => [
-        ...prevGptChat,
-        { role: "user", content: inputValue },
-      ]);
+    setGptChat((prevGptChat) => [
+      ...prevGptChat,
+      { role: "user", content: inputValue },
+    ]);
 
-      sendMessage(CHAT_BOT_URL, inputValue);
-    }
+    sendMessage(CHAT_BOT_URL, inputValue);
+
     setInputValue("");
   };
 
@@ -246,6 +236,30 @@ const Chat = () => {
         </div>
         <form onSubmit={handleSubmit} className="flex-none p-6">
           <div className="flex rounded-lg border border-gray-700 bg-gray-800">
+            <div
+              style={{ alignSelf: "center", marginLeft: "8px" }}
+              onClick={() => {
+                setUploadUrl(true);
+              }}
+            >
+              <AddLink sx={{ color: "white" }} />
+            </div>
+            <div
+              style={{ alignSelf: "center", marginLeft: "4px" }}
+              onClick={() => {
+                setUploadImage(true);
+              }}
+            >
+              <InsertPhoto sx={{ color: "white" }} />
+            </div>
+            <div
+              style={{ alignSelf: "center", marginLeft: "4px" }}
+              onClick={() => {
+                setUploadAudio(true);
+              }}
+            >
+              <AudioFile sx={{ color: "white" }} />
+            </div>
             <input
               type="text"
               className="flex-grow px-4 py-2 bg-transparent text-white focus:outline-none"
