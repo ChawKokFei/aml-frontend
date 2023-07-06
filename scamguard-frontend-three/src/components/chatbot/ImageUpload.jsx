@@ -44,14 +44,6 @@ const ImageUpload = (props) => {
               <img src={imageUrl} style={{ height: 500 }} alt="Uploaded" />
             </div>
           )}
-          {ocrData ? (
-            <div>
-              <div>Detected Text</div>
-              <div>{ocrData.text}</div>
-            </div>
-          ) : (
-            ""
-          )}
           <Button
             style={{ marginTop: 8 }}
             variant="outlined"
