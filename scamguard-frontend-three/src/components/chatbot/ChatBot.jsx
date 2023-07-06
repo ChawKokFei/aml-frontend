@@ -21,7 +21,7 @@ const Chat = () => {
   const [inputValue, setInputValue] = useState("");
   const [chatLog, setChatLog] = useState([
     { type: "bot", message: "Welcome to Scamguard" },
-    { type: "bot", message: 'Type "url" for to checking url' },
+    { type: "bot", message: 'Type "url" for checking url' },
     { type: "bot", message: 'Type "image" to upload image file for checking' },
     { type: "bot", message: 'Type "audio" to upload audio file for checking' },
     { type: "bot", message: "For anything else, just type your message" },
