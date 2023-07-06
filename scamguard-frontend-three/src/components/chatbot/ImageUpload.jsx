@@ -38,7 +38,14 @@ const ImageUpload = (props) => {
     >
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="bg-white p-4 rounded">
-          <input type="file" accept="image/*" onChange={handleUpload} />
+          <label htmlFor="image">Image File: </label>
+          <br />
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleUpload}
+          />
           {imageUrl && (
             <div>
               <img src={imageUrl} style={{ height: 500 }} alt="Uploaded" />
