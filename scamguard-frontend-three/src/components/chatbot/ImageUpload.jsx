@@ -44,6 +44,7 @@ const ImageUpload = (props) => {
               <img src={imageUrl} style={{ height: 500 }} alt="Uploaded" />
             </div>
           )}
+          <br />
           <Button
             style={{ marginTop: 8 }}
             variant="outlined"

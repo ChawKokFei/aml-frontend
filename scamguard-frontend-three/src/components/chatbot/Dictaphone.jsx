@@ -5,10 +5,12 @@ import axios from "axios";
 const Dictaphone = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [audioFile, setAudioFile] = useState(null);
+  const [showConfirmButton, setShowConfirmButtom] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setAudioFile(file);
+    setShowConfirmButtom(true);
   };
 
   return (
@@ -41,17 +43,20 @@ const Dictaphone = (props) => {
               onClick={() => {
                 props.setUploadAudio(false);
                 setIsModalOpen(false);
+                setShowConfirmButtom(false);
               }}
             >
               Close
             </Button>
-            <Button
-              type="submit"
-              style={{ marginTop: 8, marginLeft: 8 }}
-              variant="contained"
-            >
-              Confirm
-            </Button>
+            {showConfirmButton && (
+              <Button
+                type="submit"
+                style={{ marginTop: 8, marginLeft: 8 }}
+                variant="contained"
+              >
+                Confirm
+              </Button>
+            )}
           </form>
         </div>
       </div>

@@ -28,18 +28,21 @@ const UrlUpload = (props) => {
           >
             Close
           </Button>
-          <Button
-            style={{ marginTop: 8, marginLeft: 8 }}
-            variant="contained"
-            onClick={() => {
-              props.setUploadUrl(false);
-              props.handleConfirmUrl(url);
-              setUrl("");
-              setIsModalOpen(false);
-            }}
-          >
-            Confirm
-          </Button>
+
+          {url.trim() !== "" && (
+            <Button
+              style={{ marginTop: 8, marginLeft: 8 }}
+              variant="contained"
+              onClick={() => {
+                props.setUploadUrl(false);
+                props.handleConfirmUrl(url);
+                setUrl("");
+                setIsModalOpen(false);
+              }}
+            >
+              Confirm
+            </Button>
+          )}
         </div>
       </div>
     </div>
